@@ -1,15 +1,10 @@
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContactThunk } from "../../redux/contactsOps";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-export default function ContactForm({
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  contacts,
-  Yup,
-}) {
+export default function ContactForm() {
   const dispatch = useDispatch();
 
   const phoneRegExp = /^[\d\(\)\-+]+$/m;
@@ -27,7 +22,7 @@ export default function ContactForm({
   });
 
   function handleSubmit(values, actions) {
-    dispatch(addContact(values));
+    dispatch(addContactThunk(values));
     actions.resetForm();
   }
 

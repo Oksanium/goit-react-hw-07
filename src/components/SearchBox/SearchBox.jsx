@@ -1,10 +1,12 @@
 import s from "./SearchBox.module.css";
 
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { changeFilter } from "../../redux/filtersSlice";
+import { changeFilter, selectFilter } from "../../redux/filtersSlice";
 
 export default function SearchBox() {
+  const query = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -19,6 +21,7 @@ export default function SearchBox() {
         id="search"
         className={s.input}
         onChange={handleChange}
+        value={query}
       />
     </div>
   );
